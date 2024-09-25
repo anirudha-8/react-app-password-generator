@@ -54,7 +54,9 @@ function App() {
 							className="cursor-pointer"
 							onChange={(e) => setLength(e.target.value)}
 						/>
-						<label htmlFor="range">Length: {length}</label>
+						<label htmlFor="range" className="cursor-pointer">
+							Length: {length}
+						</label>
 					</div>
 					<div className="flex items-center gap-x-1">
 						<input
@@ -62,9 +64,12 @@ function App() {
 							name="numberInput"
 							id="numberInput"
 							defaultChecked={numberAllowed}
+							className="cursor-pointer"
 							onChange={() => setNumberAllowed((prev) => !prev)}
 						/>
-						<label htmlFor="numberInput">Number</label>
+						<label htmlFor="numberInput" className="cursor-pointer">
+							Number
+						</label>
 					</div>
 					<div className="flex items-center gap-x-1">
 						<input
@@ -72,11 +77,17 @@ function App() {
 							name="characterInput"
 							id="characterInput"
 							defaultChecked={characterAllowed}
+							className="cursor-pointer"
 							onChange={() =>
 								setCharacterAllowed((prev) => !prev)
 							}
 						/>
-						<label htmlFor="characterInput">Character</label>
+						<label
+							htmlFor="characterInput"
+							className="cursor-pointer"
+						>
+							Character
+						</label>
 					</div>
 				</div>
 			</div>
