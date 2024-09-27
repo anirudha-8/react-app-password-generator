@@ -7,6 +7,8 @@ function App() {
 	const [characterAllowed, setCharacterAllowed] = useState(false);
 	const [password, setPassword] = useState("");
 
+	// if something changes in the dependencies, optimize the "passwordGenerator" method.
+	// main purpose -> for optimization, using memoization, add this dependencies in cache memory.
 	const passwordGenerator = useCallback(() => {
 		let pass = "";
 
@@ -21,8 +23,10 @@ function App() {
 			pass += str.charAt(charIndex);
 		}
 		setPassword(pass);
-	}, [length, numberAllowed, characterAllowed]);
+	}, [length, numberAllowed, characterAllowed, setPassword]);
 
+	// if something changes in the dependencies, re run the "passwordGenerator" method.
+	// main purpose -> re-run when something changes
 	useEffect(() => {
 		passwordGenerator();
 	}, [length, numberAllowed, characterAllowed, passwordGenerator]);
