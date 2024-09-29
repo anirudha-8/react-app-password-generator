@@ -7,6 +7,8 @@ function App() {
 	const [characterAllowed, setCharacterAllowed] = useState(false);
 	const [password, setPassword] = useState("");
 
+	const [copyBtnVal, setCopyBtnVal] = useState("COPY");
+
 	// if something changes in the dependencies, optimize the "passwordGenerator" method.
 	// main purpose -> for optimization, using memoization, add this dependencies in cache memory.
 	const passwordGenerator = useCallback(() => {
