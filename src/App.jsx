@@ -7,8 +7,6 @@ function App() {
 	const [characterAllowed, setCharacterAllowed] = useState(false);
 	const [password, setPassword] = useState("");
 
-	const passwordRef = useRef(null);
-
 	// if something changes in the dependencies, optimize the "passwordGenerator" method.
 	// main purpose -> for optimization, using memoization, add this dependencies in cache memory.
 	const passwordGenerator = useCallback(() => {
@@ -32,6 +30,9 @@ function App() {
 	useEffect(() => {
 		passwordGenerator();
 	}, [length, numberAllowed, characterAllowed, passwordGenerator]);
+
+	// to copy the reference of password
+	const passwordRef = useRef(null);
 
 	// method for copy password to clipboard
 	const copyPasswordToClipboard = useCallback(() => {
