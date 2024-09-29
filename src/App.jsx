@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import "./App.css";
 
 function App() {
@@ -6,6 +6,8 @@ function App() {
 	const [numberAllowed, setNumberAllowed] = useState(false);
 	const [characterAllowed, setCharacterAllowed] = useState(false);
 	const [password, setPassword] = useState("");
+
+	const passwordRef = useRef(null);
 
 	// if something changes in the dependencies, optimize the "passwordGenerator" method.
 	// main purpose -> for optimization, using memoization, add this dependencies in cache memory.
@@ -31,6 +33,12 @@ function App() {
 		passwordGenerator();
 	}, [length, numberAllowed, characterAllowed, passwordGenerator]);
 
+	// method for copy password to clipboard
+	const copyPasswordToClipboard = useCallback(() => {
+		passwordRef.current?.select();
+		window.navigator.clipboard.writeText(password);
+	}, [password]);
+
 	return (
 		<>
 			<div className="w-full max-w-xl mx-auto my-8 px-4 py-3 text-[#eee] bg-gray-800 rounded-lg shadow-md">
@@ -46,8 +54,12 @@ function App() {
 						className="outline-none w-full px-3 py-2"
 						placeholder="password will be generated here..."
 						readOnly
+						ref={passwordRef}
 					/>
-					<button className="outline-none text-[#eee] bg-blue-500 px-4 py-3 shrink-0 hover:bg-blue-600">
+					<button
+						className="outline-none text-[#eee] bg-blue-500 px-4 py-3 shrink-0 hover:bg-blue-600"
+						onClick={copyPasswordToClipboard}
+					>
 						COPY
 					</button>
 				</div>
