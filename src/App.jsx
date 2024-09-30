@@ -21,7 +21,7 @@ function App() {
 		if (characterAllowed) str += "!@#$%^&*()-_=+[]{}~|<>?/";
 
 		for (let i = 0; i < length; i++) {
-			let charIndex = Math.floor(Math.random() * str.length + 1);
+			let charIndex = Math.floor(Math.random() * str.length);
 			pass += str.charAt(charIndex);
 		}
 		setPassword(pass);
@@ -61,9 +61,15 @@ function App() {
 					/>
 					<button
 						className="outline-none text-[#eee] bg-blue-500 px-4 py-3 shrink-0 hover:bg-blue-600"
-						onClick={copyPasswordToClipboard}
+						onClick={() => {
+							copyPasswordToClipboard();
+							setCopyBtnVal("COPIED");
+							setTimeout(() => {
+								setCopyBtnVal("COPY");
+							}, 2000);
+						}}
 					>
-						COPY
+						{copyBtnVal}
 					</button>
 				</div>
 				<div className="flex text-md gap-x-4">
